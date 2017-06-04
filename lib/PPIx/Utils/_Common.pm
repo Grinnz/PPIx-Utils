@@ -4,7 +4,6 @@ package PPIx::Utils::_Common;
 use strict;
 use warnings;
 use Exporter 'import';
-use ReadonlyX;
 use Scalar::Util 'blessed';
 
 our $VERSION = '0.001';
@@ -29,7 +28,7 @@ sub is_ppi_expression_or_generic_statement {
     return $element_class eq 'PPI::Statement';
 }
 
-Readonly::Hash my %SIMPLE_STATEMENT_CLASS => map { $_ => 1 } qw<
+my %SIMPLE_STATEMENT_CLASS = map { $_ => 1 } qw<
     PPI::Statement
     PPI::Statement::Break
     PPI::Statement::Include

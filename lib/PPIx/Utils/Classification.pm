@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use B::Keywords;
 use Exporter 'import';
-use ReadonlyX;
 use Scalar::Util 'blessed';
 
 use PPIx::Utils::Traversal qw(first_arg parse_arg_list);
@@ -61,7 +60,7 @@ sub _name_for_sub_or_stringified_element {
     return "$elem";
 }
 
-Readonly::Hash my %BUILTINS => map { $_ => 1 } @B::Keywords::Functions;
+my %BUILTINS = map { $_ => 1 } @B::Keywords::Functions;
 
 sub is_perl_builtin {
     my $elem = shift;
@@ -70,7 +69,7 @@ sub is_perl_builtin {
     return exists $BUILTINS{ _name_for_sub_or_stringified_element($elem) };
 }
 
-Readonly::Hash my %BAREWORDS => map { $_ => 1 } @B::Keywords::Barewords;
+my %BAREWORDS = map { $_ => 1 } @B::Keywords::Barewords;
 
 sub is_perl_bareword {
     my $elem = shift;
@@ -80,26 +79,22 @@ sub is_perl_bareword {
 }
 
 sub _build_globals_without_sigils {
-    # B::Keywords as of 1.08 forgot $\
     my @globals =
         map { substr $_, 1 }
             @B::Keywords::Arrays,
             @B::Keywords::Hashes,
-            @B::Keywords::Scalars,
-            '$\\';
+            @B::Keywords::Scalars;
 
     # Not all of these have sigils
     foreach my $filehandle (@B::Keywords::Filehandles) {
-        (my $stripped = $filehandle) =~ s< \A [*] ><>xms;
+        (my $stripped = $filehandle) =~ s< \A [*] ><>x;
         push @globals, $stripped;
     }
 
     return @globals;
 }
 
-Readonly::Array my @GLOBALS_WITHOUT_SIGILS => _build_globals_without_sigils();
-
-Readonly::Hash my %GLOBALS => map { $_ => 1 } @GLOBALS_WITHOUT_SIGILS;
+my %GLOBALS = map { $_ => 1 } _build_globals_without_sigils();
 
 sub is_perl_global {
     my $elem = shift;
@@ -109,7 +104,7 @@ sub is_perl_global {
     return exists $GLOBALS{ $var_name };
 }
 
-Readonly::Hash my %FILEHANDLES => map { $_ => 1 } @B::Keywords::Filehandles;
+my %FILEHANDLES = map { $_ => 1 } @B::Keywords::Filehandles;
 
 sub is_perl_filehandle {
     my $elem = shift;
@@ -119,7 +114,7 @@ sub is_perl_filehandle {
 }
 
 # egrep '=item.*LIST' perlfunc.pod
-Readonly::Hash my %BUILTINS_WHICH_PROVIDE_LIST_CONTEXT =>
+my %BUILTINS_WHICH_PROVIDE_LIST_CONTEXT =
     map { $_ => 1 }
         qw{
             chmod
@@ -164,7 +159,7 @@ sub is_perl_builtin_with_list_context {
 }
 
 # egrep '=item.*[A-Z],' perlfunc.pod
-Readonly::Hash my %BUILTINS_WHICH_TAKE_MULTIPLE_ARGUMENTS =>
+my %BUILTINS_WHICH_TAKE_MULTIPLE_ARGUMENTS =
     map { $_ => 1 }
         qw{
             accept
@@ -241,7 +236,7 @@ sub is_perl_builtin_with_multiple_arguments {
             };
 }
 
-Readonly::Hash my %BUILTINS_WHICH_TAKE_NO_ARGUMENTS =>
+my %BUILTINS_WHICH_TAKE_NO_ARGUMENTS =
     map { $_ => 1 }
         qw{
             endgrent
@@ -279,7 +274,7 @@ sub is_perl_builtin_with_no_arguments {
             };
 }
 
-Readonly::Hash my %BUILTINS_WHICH_TAKE_ONE_ARGUMENT =>
+my %BUILTINS_WHICH_TAKE_ONE_ARGUMENT =
     map { $_ => 1 }
         qw{
             closedir
@@ -328,7 +323,7 @@ sub is_perl_builtin_with_one_argument {
             };
 }
 
-Readonly::Hash my %BUILTINS_WHICH_TAKE_OPTIONAL_ARGUMENT =>
+my %BUILTINS_WHICH_TAKE_OPTIONAL_ARGUMENT =
     map { $_ => 1 }
         grep { not exists $BUILTINS_WHICH_TAKE_ONE_ARGUMENT{ $_ } }
         grep { not exists $BUILTINS_WHICH_TAKE_NO_ARGUMENTS{ $_ } }
@@ -510,12 +505,12 @@ sub is_in_void_context {
     return 1;
 }
 
-Readonly::Hash my %ASSIGNMENT_OPERATORS => map { $_ => 1 } qw( = **= += -= .= *= /= %= x= &= |= ^= <<= >>= &&= ||= //= );
+my %ASSIGNMENT_OPERATORS = map { $_ => 1 } qw( = **= += -= .= *= /= %= x= &= |= ^= <<= >>= &&= ||= //= );
 
 sub is_assignment_operator {
     my $elem = shift;
 
-    return $ASSIGNMENT_OPERATORS{ $elem };
+    return exists $ASSIGNMENT_OPERATORS{ $elem };
 }
 
 sub is_unchecked_call {
@@ -570,7 +565,7 @@ sub is_unchecked_call {
 }
 
 # Based upon autodie 2.10.
-Readonly::Hash my %AUTODIE_PARAMETER_TO_AFFECTED_BUILTINS_MAP => (
+my %AUTODIE_PARAMETER_TO_AFFECTED_BUILTINS_MAP = (
     # Map builtins to themselves.
     (
         map { ($_ => { $_ => 1 }) }

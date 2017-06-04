@@ -41,10 +41,9 @@
       },
       "runtime" : {
          "requires" : {
-            "B::Keywords" : "1.05",
+            "B::Keywords" : "1.09",
             "Exporter" : "0",
             "PPI" : "1.220",
-            "ReadonlyX" : "0",
             "Scalar::Util" : "0",
             "perl" : "5.006"
          }

@@ -3,7 +3,6 @@ package PPIx::Utils::Language;
 use strict;
 use warnings;
 use Exporter 'import';
-use ReadonlyX;
 
 our $VERSION = '0.001';
 
@@ -11,7 +10,7 @@ our @EXPORT_OK = qw(precedence_of);
 
 our %EXPORT_TAGS = (all => [@EXPORT_OK]);
 
-Readonly::Hash my %PRECEDENCE_OF => (
+my %PRECEDENCE_OF = (
     '->'   => 1,
     '++'   => 2,
     '--'   => 2,

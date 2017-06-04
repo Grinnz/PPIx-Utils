@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use Exporter 'import';
 use PPI::Token::Quote::Single;
-use ReadonlyX;
 
 use PPIx::Utils::Language qw(precedence_of);
 use PPIx::Utils::_Common qw(
@@ -22,7 +21,7 @@ our @EXPORT_OK = qw(
 
 our %EXPORT_TAGS = (all => [@EXPORT_OK]);
 
-Readonly::Scalar my $MIN_PRECEDENCE_TO_TERMINATE_PARENLESS_ARG_LIST =>
+my $MIN_PRECEDENCE_TO_TERMINATE_PARENLESS_ARG_LIST =
     precedence_of( 'not' );
 
 sub first_arg {

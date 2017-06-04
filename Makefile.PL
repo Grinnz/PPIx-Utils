@@ -17,10 +17,9 @@ my %WriteMakefileArgs = (
   "MIN_PERL_VERSION" => "5.006",
   "NAME" => "PPIx::Utils",
   "PREREQ_PM" => {
-    "B::Keywords" => "1.05",
+    "B::Keywords" => "1.09",
     "Exporter" => 0,
     "PPI" => "1.220",
-    "ReadonlyX" => 0,
     "Scalar::Util" => 0
   },
   "TEST_REQUIRES" => {
@@ -36,12 +35,11 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "B::Keywords" => "1.05",
+  "B::Keywords" => "1.09",
   "Exporter" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
   "PPI" => "1.220",
-  "ReadonlyX" => 0,
   "Scalar::Util" => 0,
   "Test::More" => "0.88"
 );
