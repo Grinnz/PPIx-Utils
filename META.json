@@ -1,5 +1,5 @@
 {
-   "abstract" : "General utility functions for PPI",
+   "abstract" : "Utility functions for PPI",
    "author" : [
       "Dan Book <dbook@cpan.org>"
    ],
@@ -21,6 +21,9 @@
          "share",
          "t",
          "xt"
+      ],
+      "package" : [
+         "PPIx::Utils::_Common"
       ]
    },
    "prereqs" : {
@@ -38,8 +41,9 @@
       },
       "runtime" : {
          "requires" : {
+            "B::Keywords" : "1.05",
             "Exporter" : "0",
-            "PPI" : "0",
+            "PPI" : "1.220",
             "ReadonlyX" : "0",
             "Scalar::Util" : "0",
             "perl" : "5.006"
@@ -59,6 +63,22 @@
    "provides" : {
       "PPIx::Utils" : {
          "file" : "lib/PPIx/Utils.pm",
+         "version" : "0.001"
+      },
+      "PPIx::Utils::Characters" : {
+         "file" : "lib/PPIx/Utils/Characters.pm",
+         "version" : "0.001"
+      },
+      "PPIx::Utils::Classification" : {
+         "file" : "lib/PPIx/Utils/Classification.pm",
+         "version" : "0.001"
+      },
+      "PPIx::Utils::Language" : {
+         "file" : "lib/PPIx/Utils/Language.pm",
+         "version" : "0.001"
+      },
+      "PPIx::Utils::Traversal" : {
+         "file" : "lib/PPIx/Utils/Traversal.pm",
          "version" : "0.001"
       }
    },

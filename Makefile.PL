@@ -7,7 +7,7 @@ use 5.006;
 use ExtUtils::MakeMaker;
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "General utility functions for PPI",
+  "ABSTRACT" => "Utility functions for PPI",
   "AUTHOR" => "Dan Book <dbook\@cpan.org>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0
@@ -17,8 +17,9 @@ my %WriteMakefileArgs = (
   "MIN_PERL_VERSION" => "5.006",
   "NAME" => "PPIx::Utils",
   "PREREQ_PM" => {
+    "B::Keywords" => "1.05",
     "Exporter" => 0,
-    "PPI" => 0,
+    "PPI" => "1.220",
     "ReadonlyX" => 0,
     "Scalar::Util" => 0
   },
@@ -35,10 +36,11 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
+  "B::Keywords" => "1.05",
   "Exporter" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
-  "PPI" => 0,
+  "PPI" => "1.220",
   "ReadonlyX" => 0,
   "Scalar::Util" => 0,
   "Test::More" => "0.88"
