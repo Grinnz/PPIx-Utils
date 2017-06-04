@@ -14,9 +14,9 @@ C<PPIx::Utils> is a collection of utility functions for working with L<PPI>
 documents. The functions are organized into submodules, and may be imported
 from the appropriate submodule or via this module.
 
-These functions were originally from L<Perl::Critic::Utils> and
-L<Perl::Critic::Utils::PPI>, and have been split off to this distribution for
-use outside of L<Perl::Critic>.
+These functions were originally from L<Perl::Critic::Utils> and related
+modules, and have been split off to this distribution for use outside of
+L<Perl::Critic>.
 
 =head1 MODULES
 
