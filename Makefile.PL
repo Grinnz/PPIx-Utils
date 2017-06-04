@@ -7,13 +7,13 @@ use 5.006;
 use ExtUtils::MakeMaker;
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Module abstract",
+  "ABSTRACT" => "General utility functions for PPI",
   "AUTHOR" => "Dan Book <dbook\@cpan.org>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0
   },
   "DISTNAME" => "PPIx-Utils",
-  "LICENSE" => "artistic_2",
+  "LICENSE" => "perl",
   "MIN_PERL_VERSION" => "5.006",
   "NAME" => "PPIx::Utils",
   "PREREQ_PM" => {
