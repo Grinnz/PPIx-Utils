@@ -108,7 +108,7 @@ my %PRECEDENCE_OF = (
 
 sub precedence_of {
     my $elem = shift;
-    return if !$elem;
+    return undef if !$elem;
     return $PRECEDENCE_OF{ ref $elem ? "$elem" : $elem };
 }
 
