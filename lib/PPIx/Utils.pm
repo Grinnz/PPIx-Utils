@@ -45,6 +45,8 @@ use outside of L<Perl::Critic>.
 
 =head1 MODULES
 
+The import tag C<:all> will import the functions from all modules listed below.
+
 =head2 L<PPIx::Utils::Classification>
 
 Functions related to classification of L<PPI> elements. All functions from this
@@ -59,9 +61,6 @@ imported with the import tag C<:language>.
 
 Functions related to traversal of L<PPI> documents. All functions from this
 module can be imported with the import tag C<:traversal>.
-
-Additionally, the import tag C<:all> will import the functions from all
-submodules.
 
 =head1 BUGS
 
