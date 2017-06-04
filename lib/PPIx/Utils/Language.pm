@@ -10,6 +10,7 @@ our @EXPORT_OK = qw(precedence_of);
 
 our %EXPORT_TAGS = (all => [@EXPORT_OK]);
 
+# From Perl::Critic::Utils
 my %PRECEDENCE_OF = (
     '->'   => 1,
     '++'   => 2,

@@ -50,6 +50,7 @@ our @EXPORT_OK = qw(
 
 our %EXPORT_TAGS = (all => [@EXPORT_OK]);
 
+# From Perl::Critic::Utils
 sub _name_for_sub_or_stringified_element {
     my $elem = shift;
 
@@ -715,6 +716,7 @@ sub _is_covered_by_autodie {
     return undef;
 }
 
+# From Perl::Critic::Utils::PPI
 sub is_ppi_generic_statement {
     my $element = shift;
 

@@ -15,6 +15,7 @@ our @EXPORT_OK = qw(
 
 our %EXPORT_TAGS = (all => [@EXPORT_OK]);
 
+# From Perl::Critic::Utils::PPI
 sub is_ppi_expression_or_generic_statement {
     my $element = shift;
 
