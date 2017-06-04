@@ -112,6 +112,7 @@ sub precedence_of {
     return undef if !$elem;
     return $PRECEDENCE_OF{ ref $elem ? "$elem" : $elem };
 }
+# End from Perl::Critic::Utils
 
 1;
 

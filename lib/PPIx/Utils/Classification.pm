@@ -715,6 +715,7 @@ sub _is_covered_by_autodie {
 
     return undef;
 }
+# End from Perl::Critic::Utils
 
 # From Perl::Critic::Utils::PPI
 sub is_ppi_generic_statement {
@@ -789,6 +790,7 @@ sub is_in_subroutine {
 
     return undef;
 }
+# End from Perl::Critic::Utils::PPI
 
 1;
 

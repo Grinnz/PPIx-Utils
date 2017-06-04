@@ -151,6 +151,7 @@ sub get_previous_module_used_on_same_line {
 
     return undef;
 }
+# End from Perl::Critic::Utils
 
 # From PPIx::Utilities::Statement
 my %IS_COMMA = ( q[,] => 1, q[=>] => 1 );
@@ -234,6 +235,7 @@ sub _get_constant_names_from_constant_pragma {
 
     return ($follower);
 }
+# End from PPIx::Utilities::Statement
 
 # From PPIx::Utilities::Node
 sub split_ppi_node_by_namespace {
@@ -379,6 +381,7 @@ sub _push_fragment {
 
     return;
 }
+# End from PPIx::Utilities::Node
 
 1;
 
@@ -620,4 +623,4 @@ the same terms as the Perl 5 programming language system itself.
 
 =head1 SEE ALSO
 
-L<Perl::Critic::Utils>, L<Perl::Critic::Utils::PPI>
+L<Perl::Critic::Utils>, L<Perl::Critic::Utils::PPI>, L<PPIx::Utilities>

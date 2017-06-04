@@ -45,6 +45,7 @@ sub is_ppi_simple_statement {
 
     return $SIMPLE_STATEMENT_CLASS{ $element_class };
 }
+# End from Perl::Critic::Utils::PPI
 
 1;
 
