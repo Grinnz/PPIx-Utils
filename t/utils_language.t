@@ -30,4 +30,16 @@ sub test_precedence_of {
     return;
 }
 
+# Tests from Perl::Critic::Utils::Perl t/05_utils_perl.t
+{
+    foreach my $sigil ( q<>, qw< $ @ % * & > ) {
+        my $symbol = "${sigil}foo";
+        is(
+            symbol_without_sigil($symbol),
+            'foo',
+            "symbol_without_sigil($symbol)",
+        );
+    }
+}
+
 done_testing;

@@ -6,7 +6,7 @@ use Exporter 'import';
 
 our $VERSION = '0.001';
 
-our @EXPORT_OK = qw(precedence_of);
+our @EXPORT_OK = qw(precedence_of symbol_without_sigil);
 
 our %EXPORT_TAGS = (all => [@EXPORT_OK]);
 
@@ -114,6 +114,16 @@ sub precedence_of {
 }
 # End from Perl::Critic::Utils
 
+# From Perl::Critic::Utils::Perl
+sub symbol_without_sigil {
+    my ($symbol) = @_;
+
+    (my $without_sigil = $symbol) =~ s< \A [\$@%*&] ><>x;
+
+    return $without_sigil;
+}
+# End from Perl::Critic::Utils::Perl
+
 1;
 
 =head1 NAME
@@ -142,6 +152,13 @@ the operator, where 1 is the highest precedence.  Returns undef if the
 precedence can't be determined (which is usually because it is not an
 operator).
 
+=head2 symbol_without_sigil
+
+    my $name = symbol_without_sigil($symbol);
+
+Returns the name of the specified symbol with any sigil at the front.
+The parameter can be a vanilla Perl string or a L<PPI::Element>.
+
 =head1 BUGS
 
 Report any issues on the public bugtracker.
@@ -151,16 +168,17 @@ Report any issues on the public bugtracker.
 Dan Book <dbook@cpan.org>
 
 Code originally from L<Perl::Critic::Utils> by Jeffrey Ryan Thalhammer
-<jeff@imaginative-software.com>
+<jeff@imaginative-software.com> and L<Perl::Critic::Utils::Perl> by
+Elliot Shank <perl@galumph.com>
 
 =head1 COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2005-2011 Imaginative Software Systems,
-2017 Dan Book.
+2007-2011 Elliot Shank, 2017 Dan Book.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 SEE ALSO
 
-L<Perl::Critic::Utils>
+L<Perl::Critic::Utils>, L<Perl::Critic::Utils::Perl>

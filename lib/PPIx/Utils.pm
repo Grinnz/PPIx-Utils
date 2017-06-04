@@ -71,9 +71,10 @@ Report any issues on the public bugtracker.
 Dan Book <dbook@cpan.org>
 
 Code originally from L<Perl::Critic::Utils> by Jeffrey Ryan Thalhammer
-<jeff@imaginative-software.com>, L<Perl::Critic::Utils::PPI> and
-L<PPIx::Utilities::Node> by Elliot Shank <perl@galumph.com>, and
-L<PPIx::Utilities::Statement> by Thomas R. Wyant, III <wyant@cpan.org>
+<jeff@imaginative-software.com>, L<Perl::Critic::Utils::PPI> +
+L<Perl::Critic::Utils::Perl> + L<PPIx::Utilities::Node> by Elliot Shank
+<perl@galumph.com>, and L<PPIx::Utilities::Statement> by
+Thomas R. Wyant, III <wyant@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -85,4 +86,4 @@ the same terms as the Perl 5 programming language system itself.
 
 =head1 SEE ALSO
 
-L<Perl::Critic::Utils>, L<Perl::Critic::Utils::PPI>, L<PPIx::Utilities>
+L<PPI>, L<Perl::Critic::Utils>, L<PPIx::Utilities>
