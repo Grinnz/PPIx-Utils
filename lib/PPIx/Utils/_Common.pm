@@ -49,3 +49,5 @@ sub is_ppi_simple_statement {
 1;
 
 =for Pod::Coverage *EVERYTHING*
+
+=cut

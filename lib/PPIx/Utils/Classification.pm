@@ -510,7 +510,7 @@ sub is_in_void_context {
     return 1;
 }
 
-Readonly::Hash my %ASSIGNMENT_OPERATORS => map { $_ => 1 } qw( = **= += -= .= *= /= %= x= &= |= ^= <<= >>= &&= ||= //= ) );
+Readonly::Hash my %ASSIGNMENT_OPERATORS => map { $_ => 1 } qw( = **= += -= .= *= /= %= x= &= |= ^= <<= >>= &&= ||= //= );
 
 sub is_assignment_operator {
     my $elem = shift;
