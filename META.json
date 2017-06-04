@@ -65,10 +65,6 @@
          "file" : "lib/PPIx/Utils.pm",
          "version" : "0.001"
       },
-      "PPIx::Utils::Characters" : {
-         "file" : "lib/PPIx/Utils/Characters.pm",
-         "version" : "0.001"
-      },
       "PPIx::Utils::Classification" : {
          "file" : "lib/PPIx/Utils/Classification.pm",
          "version" : "0.001"

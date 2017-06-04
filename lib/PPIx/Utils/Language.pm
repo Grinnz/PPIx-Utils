@@ -121,7 +121,25 @@ PPIx::Utils::Language - Utility functions for PPI related to the Perl language
 
 =head1 SYNOPSIS
 
+    use PPIx::Utils::Language ':all';
+
 =head1 DESCRIPTION
+
+This package is a component of L<PPIx::Utils> that contains functions
+related to aspects of the Perl language.
+
+=head1 FUNCTIONS
+
+All functions can be imported by name, or with the tag C<:all>.
+
+=head2 precedence_of
+
+    my $precedence = precedence_of($element);
+
+Given a L<PPI::Token::Operator> or a string, returns the precedence of
+the operator, where 1 is the highest precedence.  Returns undef if the
+precedence can't be determined (which is usually because it is not an
+operator).
 
 =head1 BUGS
 
@@ -129,14 +147,15 @@ Report any issues on the public bugtracker.
 
 =head1 AUTHOR
 
-Maintained by Dan Book <dbook@cpan.org>
+Dan Book <dbook@cpan.org>
 
 Code originally from L<Perl::Critic::Utils> by Jeffrey Ryan Thalhammer
 <jeff@imaginative-software.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2005-2011 by Imaginative Software Systems.
+This software is copyright (c) 2005-2011 Imaginative Software Systems,
+2017 Dan Book.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

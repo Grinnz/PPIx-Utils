@@ -802,7 +802,295 @@ elements
 
 =head1 SYNOPSIS
 
+    use PPIx::Utils::Classification ':all';
+
 =head1 DESCRIPTION
+
+This package is a component of L<PPIx::Utils> that contains functions for
+classification of L<PPI> elements.
+
+=head1 FUNCTIONS
+
+All functions can be imported by name, or with the tag C<:all>.
+
+=head2 is_assignment_operator
+
+    my $bool = is_assignment_operator($element);
+
+Given a L<PPI::Token::Operator> or a string, returns true if that
+token represents one of the assignment operators (e.g.
+C<= &&= ||= //= += -=> etc.).
+
+=head2 is_perl_global
+
+    my $bool = is_perl_global($element);
+
+Given a L<PPI::Token::Symbol> or a string, returns true if that token
+represents one of the global variables provided by the L<English>
+module, or one of the builtin global variables like C<%SIG>, C<%ENV>,
+or C<@ARGV>.  The sigil on the symbol is ignored, so things like
+C<$ARGV> or C<$ENV> will still return true.
+
+=head2 is_perl_builtin
+
+    my $bool = is_perl_builtin($element);
+
+Given a L<PPI::Token::Word>, L<PPI::Statement::Sub>, or string,
+returns true if that token represents a call to any of the builtin
+functions defined in Perl 5.8.8.
+
+=head2 is_perl_bareword
+
+    my $bool = is_perl_bareword($element);
+
+Given a L<PPI::Token::Word>, L<PPI::Statement::Sub>, or string,
+returns true if that token represents a bareword (e.g. "if", "else",
+"sub", "package") defined in Perl 5.8.8.
+
+=head2 is_perl_filehandle
+
+    my $bool = is_perl_filehandle($element);
+
+Given a L<PPI::Token::Word>, or string, returns true if that token
+represents one of the global filehandles (e.g. C<STDIN>, C<STDERR>,
+C<STDOUT>, C<ARGV>) that are defined in Perl 5.8.8.  Note that this
+function will return false if given a filehandle that is represented
+as a typeglob (e.g. C<*STDIN>)
+
+=head2 is_perl_builtin_with_list_context
+
+    my $bool = is_perl_builtin_with_list_context($element);
+
+Given a L<PPI::Token::Word>, L<PPI::Statement::Sub>, or string,
+returns true if that token represents a call to any of the builtin
+functions defined in Perl 5.8.8 that provide a list context to the
+following tokens.
+
+=head2 is_perl_builtin_with_multiple_arguments
+
+    my $bool = is_perl_builtin_with_multiple_arguments($element);
+
+Given a L<PPI::Token::Word>, L<PPI::Statement::Sub>, or string,
+returns true if that token represents a call to any of the builtin
+functions defined in Perl 5.8.8 that B<can> take multiple arguments.
+
+=head2 is_perl_builtin_with_no_arguments
+
+    my $bool = is_perl_builtin_with_no_arguments($element);
+
+Given a L<PPI::Token::Word>, L<PPI::Statement::Sub>, or string,
+returns true if that token represents a call to any of the builtin
+functions defined in Perl 5.8.8 that B<cannot> take any arguments.
+
+=head2 is_perl_builtin_with_one_argument
+
+    my $bool = is_perl_builtin_with_one_argument($element);
+
+Given a L<PPI::Token::Word>, L<PPI::Statement::Sub>, or string,
+returns true if that token represents a call to any of the builtin
+functions defined in Perl 5.8.8 that takes B<one and only one>
+argument.
+
+=head2 is_perl_builtin_with_optional_argument
+
+    my $bool = is_perl_builtin_with_optional_argument($element);
+
+Given a L<PPI::Token::Word>, L<PPI::Statement::Sub>, or string,
+returns true if that token represents a call to any of the builtin
+functions defined in Perl 5.8.8 that takes B<no more than one>
+argument.
+
+The sets of values for which
+L</is_perl_builtin_with_multiple_arguments>,
+L</is_perl_builtin_with_no_arguments>,
+L</is_perl_builtin_with_one_argument>, and
+L</is_perl_builtin_with_optional_argument> return true are disjoint
+and their union is precisely the set of values that
+L</is_perl_builtin> will return true for.
+
+=head2 is_perl_builtin_with_zero_and_or_one_arguments
+
+    my $bool = is_perl_builtin_with_zero_and_or_one_arguments($element);
+
+Given a L<PPI::Token::Word>, L<PPI::Statement::Sub>, or string,
+returns true if that token represents a call to any of the builtin
+functions defined in Perl 5.8.8 that takes no and/or one argument.
+
+Returns true if any of L</is_perl_builtin_with_no_arguments>,
+L</is_perl_builtin_with_one_argument>, and
+L</is_perl_builtin_with_optional_argument> returns true.
+
+=head2 is_qualified_name
+
+    my $bool = is_qualified_name($name);
+
+Given a string, L<PPI::Token::Word>, or L<PPI::Token::Symbol>, answers
+whether it has a module component, i.e. contains "::".
+
+=head2 is_hash_key
+
+    my $bool = is_hash_key($element);
+
+Given a L<PPI::Element>, returns true if the element is a literal hash
+key.  PPI doesn't distinguish between regular barewords (like keywords
+or subroutine calls) and barewords in hash subscripts (which are
+considered literal).  So this subroutine is useful if your Policy is
+searching for L<PPI::Token::Word> elements and you want to filter out
+the hash subscript variety.  In both of the following examples, "foo"
+is considered a hash key:
+
+    $hash1{foo} = 1;
+    %hash2 = (foo => 1);
+
+But if the bareword is followed by an argument list, then perl treats
+it as a function call.  So in these examples, "foo" is B<not>
+considered a hash key:
+
+    $hash1{ foo() } = 1;
+    &hash2 = (foo() => 1);
+
+=head2 is_included_module_name
+
+    my $bool = is_included_module_name($element);
+
+Given a L<PPI::Token::Word>, returns true if the element is the name
+of a module that is being included via C<use>, C<require>, or C<no>.
+
+=head2 is_integer
+
+    my $bool = is_integer($value);
+
+Answers whether the parameter, as a string, looks like an integral
+value.
+
+=head2 is_class_name
+
+    my $bool = is_class_name($element);
+
+Given a L<PPI::Token::Word>, returns true if the element that
+immediately follows this element is the dereference operator "->".
+When a bareword has a "->" on the B<right> side, it usually means that
+it is the name of the class (from which a method is being called).
+
+=head2 is_label_pointer
+
+    my $bool = is_label_pointer($element);
+
+Given a L<PPI::Token::Word>, returns true if the element is the label
+in a C<next>, C<last>, C<redo>, or C<goto> statement.  Note this is
+not the same thing as the label declaration.
+
+=head2 is_method_call
+
+    my $bool = is_method_call($element);
+
+Given a L<PPI::Token::Word>, returns true if the element that
+immediately precedes this element is the dereference operator "->".
+When a bareword has a "->" on the B<left> side, it usually means that
+it is the name of a method (that is being called from a class).
+
+=head2 is_package_declaration
+
+    my $bool = is_package_declaration($element);
+
+Given a L<PPI::Token::Word>, returns true if the element is the name
+of a package that is being declared.
+
+=head2 is_subroutine_name
+
+    my $bool = is_subroutine_name($element);
+
+Given a L<PPI::Token::Word>, returns true if the element is the name
+of a subroutine declaration.  This is useful for distinguishing
+barewords and from function calls from subroutine declarations.
+
+=head2 is_function_call
+
+    my $bool = is_function_call($element);
+
+Given a L<PPI::Token::Word> returns true if the element appears to be
+call to a static function.  Specifically, this function returns true
+if L</is_hash_key>, L</is_method_call>, L</is_subroutine_name>,
+L</is_included_module_name>, L</is_package_declaration>,
+L</is_perl_bareword>, L</is_perl_filehandle>, L</is_label_pointer> and
+L</is_subroutine_name> all return false for the given element.
+
+=head2 is_in_void_context
+
+    my $bool = is_in_void_context($token);
+
+Given a L<PPI::Token>, answer whether it appears to be in a void
+context.
+
+=head2 is_unchecked_call
+
+    my $bool = is_unchecked_call($element);
+
+Given a L<PPI::Element>, test to see if it contains a function call
+whose return value is not checked.
+
+=head2 is_ppi_expression_or_generic_statement
+
+    my $bool = is_ppi_expression_or_generic_statement($element);
+
+Answers whether the parameter is an expression or an undifferentiated
+statement.  I.e. the parameter either is a
+L<PPI::Statement::Expression> or the class of the parameter is
+L<PPI::Statement> and not one of its subclasses other than
+C<Expression>.
+
+=head2 is_ppi_generic_statement
+
+    my $bool = is_ppi_generic_statement($element);
+
+Answers whether the parameter is an undifferentiated statement, i.e.
+the parameter is a L<PPI::Statement> but not one of its subclasses.
+
+=head2 is_ppi_statement_subclass
+
+    my $bool = is_ppi_statement_subclass($element);
+
+Answers whether the parameter is a specialized statement, i.e. the
+parameter is a L<PPI::Statement> but the class of the parameter is not
+L<PPI::Statement>.
+
+=head2 is_ppi_simple_statement
+
+    my $bool = is_ppi_simple_statement($element);
+
+Answers whether the parameter represents a simple statement, i.e. whether the
+parameter is a L<PPI::Statement>, L<PPI::Statement::Break>,
+L<PPI::Statement::Include>, L<PPI::Statement::Null>,
+L<PPI::Statement::Package>, or L<PPI::Statement::Variable>.
+
+=head2 is_ppi_constant_element
+
+    my $bool = is_ppi_constant_element($element);
+
+Answers whether the parameter represents a constant value, i.e. whether the
+parameter is a L<PPI::Token::Number>, L<PPI::Token::Quote::Literal>,
+L<PPI::Token::Quote::Single>, or L<PPI::Token::QuoteLike::Words>, or
+is a L<PPI::Token::Quote::Double> or L<PPI::Token::Quote::Interpolate>
+which does not in fact contain any interpolated variables.
+
+This subroutine does B<not> interpret any form of here document as a constant
+value, and may not until L<PPI::Token::HereDoc> acquires the relevant
+portions of the L<PPI::Token::Quote> interface.
+
+This subroutine also does B<not> interpret entities created by the
+L<ReadonlyX> module (or similar) or the L<constant> pragma as constants.
+
+=head2 is_subroutine_declaration
+
+    my $bool = is_subroutine_declaration($element);
+
+Is the parameter a subroutine declaration, named or not?
+
+=head2 is_in_subroutine
+
+    my $bool = is_in_subroutine($element);
+
+Is the parameter a subroutine or inside one?
 
 =head1 BUGS
 
@@ -810,14 +1098,16 @@ Report any issues on the public bugtracker.
 
 =head1 AUTHOR
 
-Maintained by Dan Book <dbook@cpan.org>
+Dan Book <dbook@cpan.org>
 
-Code originally from L<Perl::Critic::Utils> and L<Perl::Critic::Utils::PPI> by
-Jeffrey Ryan Thalhammer <jeff@imaginative-software.com>
+Code originally from L<Perl::Critic::Utils> by Jeffrey Ryan Thalhammer
+<jeff@imaginative-software.com> and L<Perl::Critic::Utils::PPI> by
+Elliot Shank <perl@galumph.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2005-2011 by Imaginative Software Systems.
+This software is copyright (c) 2005-2011 Imaginative Software Systems,
+2007-2011 Elliot Shank, 2017 Dan Book.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

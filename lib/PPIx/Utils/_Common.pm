@@ -1,4 +1,5 @@
 package PPIx::Utils::_Common;
+# See the README of this distribution for copyright and license information.
 
 use strict;
 use warnings;
