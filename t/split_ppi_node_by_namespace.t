@@ -886,14 +886,16 @@ sub _test {
     my $document = PPI::Document->new(\$source);
 
     my %expanded_expected;
-    while ( my ($namespace, $strings) = each %{$expected_ref} ) {
+    foreach my $namespace ( keys %{$expected_ref} ) {
+        my $strings = $expected_ref->{$namespace};
         $expanded_expected{$namespace} =
-            [ map { [ split m/ \n /xms ] } @{$strings} ];
+            [ map { [ split m/ \n /x ] } @{$strings} ];
     }
 
     my $got = split_ppi_node_by_namespace($document);
     my %got_expanded;
-    while ( my ($namespace, $ppi_doms) = each %{$got} ) {
+    foreach my $namespace ( keys %{$got} ) {
+        my $ppi_doms = $got->{$namespace};
         $got_expanded{$namespace} =
             [
                 map {
@@ -929,7 +931,7 @@ sub _expand_tabs {
     while (
         $string =~
             s< \A ( [^\t]* ) ( \t+ )                          >
-             <$1 . ( ' ' x (length($2) * $DUMP_INDENT - length($1) % $DUMP_INDENT) )>xmse
+             <$1 . ( ' ' x (length($2) * $DUMP_INDENT - length($1) % $DUMP_INDENT) )>xe
     ) {
         # Nothing here.
     }

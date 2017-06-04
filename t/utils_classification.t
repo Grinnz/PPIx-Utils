@@ -515,7 +515,7 @@ $instances{'PPI::Token::Word'} = PPI::Token::Word->new('foo');
 
         my $name = defined $code ? $code : '<undef>';
 
-        local $Test::Builder::Level = $Test::Builder::Level + 1; ## no critic (Variables::ProhibitPackageVars)
+        local $Test::Builder::Level = $Test::Builder::Level + 1;
         is(
             ! ! is_in_subroutine( $input ),
             ! ! $result,

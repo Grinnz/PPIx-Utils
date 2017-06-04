@@ -101,7 +101,7 @@ sub is_perl_global {
     my $elem = shift;
     return undef if !$elem;
     my $var_name = "$elem"; #Convert Token::Symbol to string
-    $var_name =~ s{\A [\$@%*] }{}xms;  #Chop off the sigil
+    $var_name =~ s{\A [\$@%*] }{}x;  #Chop off the sigil
     return exists $GLOBALS{ $var_name };
 }
 
@@ -407,7 +407,7 @@ sub is_integer {
     my ($value) = @_;
     return 0 if not defined $value;
 
-    return $value =~ m{ \A [+-]? \d+ \z }xms;
+    return $value =~ m{ \A [+-]? [0-9]+ \z }x;
 }
 
 sub is_label_pointer {
@@ -421,7 +421,7 @@ sub is_label_pointer {
     return undef if !$psib;
 
     return $statement->isa('PPI::Statement::Break')
-        && $psib =~ m/(?:redo|goto|next|last)/xmso;
+        && $psib =~ m/(?:redo|goto|next|last)/x;
 }
 
 sub _is_dereference_operator {
