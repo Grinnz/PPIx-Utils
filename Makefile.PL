@@ -23,8 +23,10 @@ my %WriteMakefileArgs = (
     "Scalar::Util" => 0
   },
   "TEST_REQUIRES" => {
+    "Data::Dumper" => 0,
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
+    "PPI::Dumper" => 0,
     "Test::More" => "0.88"
   },
   "VERSION" => "0.001",
@@ -36,10 +38,12 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "B::Keywords" => "1.09",
+  "Data::Dumper" => 0,
   "Exporter" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
   "PPI" => "1.220",
+  "PPI::Dumper" => 0,
   "Scalar::Util" => 0,
   "Test::More" => "0.88"
 );

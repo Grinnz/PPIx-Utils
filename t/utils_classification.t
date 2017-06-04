@@ -1,3 +1,5 @@
+# Tests from Perl::Critic::Utils t/05_utils.t
+
 use strict;
 use warnings;
 
@@ -207,6 +209,8 @@ sub test_is_unchecked_call {
 
     return;
 }
+
+# Tests from Perl::Critic::Utils::PPI t/05_utils_ppi.t
 
 use PPI::Document qw< >;
 use PPI::Statement::Break qw< >;

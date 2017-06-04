@@ -4,3 +4,5 @@ requires 'Exporter';
 requires 'PPI' => '1.220';
 requires 'Scalar::Util';
 test_requires 'Test::More' => '0.88';
+test_requires 'Data::Dumper';
+test_requires 'PPI::Dumper';

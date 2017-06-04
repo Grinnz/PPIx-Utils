@@ -1,3 +1,5 @@
+# Tests from Perl::Critic::Utils t/05_utils.t
+
 use strict;
 use warnings;
 
