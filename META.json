@@ -64,19 +64,19 @@
    "provides" : {
       "PPIx::Utils" : {
          "file" : "lib/PPIx/Utils.pm",
-         "version" : "0.001"
+         "version" : "0.002"
       },
       "PPIx::Utils::Classification" : {
          "file" : "lib/PPIx/Utils/Classification.pm",
-         "version" : "0.001"
+         "version" : "0.002"
       },
       "PPIx::Utils::Language" : {
          "file" : "lib/PPIx/Utils/Language.pm",
-         "version" : "0.001"
+         "version" : "0.002"
       },
       "PPIx::Utils::Traversal" : {
          "file" : "lib/PPIx/Utils/Traversal.pm",
-         "version" : "0.001"
+         "version" : "0.002"
       }
    },
    "release_status" : "stable",
@@ -91,7 +91,7 @@
          "web" : "https://github.com/Grinnz/PPIx-Utils"
       }
    },
-   "version" : "0.001",
+   "version" : "0.002",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.026000"
@@ -280,7 +280,7 @@
                   "branch" : null,
                   "changelog" : "Changes",
                   "signed" : 0,
-                  "tag" : "v0.001",
+                  "tag" : "v0.002",
                   "tag_format" : "v%v",
                   "tag_message" : "v%v"
                },
