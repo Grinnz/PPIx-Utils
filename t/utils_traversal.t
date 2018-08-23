@@ -66,6 +66,7 @@ sub test_get_constant_name_elements_from_declaring_statement {
         ['use constant FOO => 1;', ['FOO']],
         ['use constant { FOO => 1 };', ['FOO']],
         ['use constant { FOO => 1, BAR => 2 };', ['FOO', 'BAR']],
+        ['use constant +{ FOO => 1, BAR => 2 };', ['FOO', 'BAR']],
     );
 
     foreach my $test (@tests) {
