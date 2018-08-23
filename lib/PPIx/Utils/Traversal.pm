@@ -193,6 +193,11 @@ sub _get_constant_names_from_constant_pragma {
     my $follower = $arguments[0];
     return() if not defined $follower;
 
+    if ($follower->isa('PPI::Token::Operator') && $follower->content eq '+') {
+        $follower = $arguments[1];
+        return() if not defined $follower;
+    }
+
     # We test for a 'PPI::Structure::Block' in the following because some
     # versions of PPI parse the last element of 'use constant { ONE => 1, TWO
     # => 2 }' as a block rather than a constructor. As of PPI 1.206, PPI
