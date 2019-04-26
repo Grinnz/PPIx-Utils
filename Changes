@@ -1,4 +1,5 @@
 {{$NEXT}}
+  - Fix test for corrected parsing in PPI 1.248 (#2)
 
 0.002     2018-08-23 13:32:07 EDT
   - Add tests and support a special case in get_constant_name_elements_from_declaring_statement (#1)
